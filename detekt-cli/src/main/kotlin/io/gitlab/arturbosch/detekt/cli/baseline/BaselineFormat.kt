@@ -28,6 +28,7 @@ class BaselineFormat {
 
     fun write(baseline: Baseline, path: Path) {
         try {
+            println("TOTO I write")
             Files.newBufferedWriter(path).use {
                 it.streamXml().prettyPrinter().save(baseline)
             }

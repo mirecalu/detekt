@@ -8,6 +8,6 @@ data class Whitelist(
 ) : Listing<Whitelist> {
 
     override fun toString(): String {
-        return "Blacklist(ids=$ids)"
+        return "Whitelist(ids=$ids)"
     }
 }

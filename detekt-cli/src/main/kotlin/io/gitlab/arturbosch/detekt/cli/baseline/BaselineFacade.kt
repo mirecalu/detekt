@@ -27,15 +27,35 @@ class BaselineFacade(val baselineFile: Path) {
 
     fun create(smells: List<Finding>) {
         val blacklist = if (baselineExists()) {
+            println("TOTOget old blacklist")
             BaselineFormat().read(baselineFile).blacklist
         } else {
             Blacklist(emptySet())
         }
+
+        val whitelist = if (baselineExists()) {
+            println("TOTOget old whitelist")
+            BaselineFormat().read(baselineFile).whitelist
+        } else {
+            Whitelist(emptySet())
+        }
+
+        println("TOTOWHITE LIST : $whitelist")
         val ids = smells.map { it.baselineId }.toSortedSet()
-        val smellBaseline = Baseline(blacklist, Whitelist(ids))
-        baselineFile.parent?.let { Files.createDirectories(it) }
+        println("IDS :  $ids")
+
+        val mergedWhitelist = ids.union(whitelist.ids)
+
+        val smellBaseline = Baseline(blacklist, Whitelist(mergedWhitelist))
+        baselineFile.parent?.let {
+            println("It exist ? $baselineFile")
+            if (!baselineExists()) {
+                println("TOTOIt doesnt exist $baselineFile")
+                Files.createDirectories(it)
+            }
+        }
         BaselineFormat().write(smellBaseline, baselineFile)
-        println("Successfully wrote smell baseline to $baselineFile")
+        println("TOTOSuccessfully wrote smell baseline to $baselineFile")
     }
 
     private fun baselineExists() = baselineFile.exists() && baselineFile.isFile()

@@ -1,9 +1,10 @@
+
 import com.jfrog.bintray.gradle.BintrayExtension
 import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Date
+import java.util.*
 
 plugins {
     id("com.gradle.build-scan") version "2.3"
@@ -55,7 +56,7 @@ allprojects {
     repositories {
         mavenLocal()
         jcenter()
-        maven(url = "https://dl.bintray.com/arturbosch/generic")
+        //maven(url = "https://dl.bintray.com/arturbosch/generic")
     }
 }
 
